@@ -30,3 +30,10 @@
     * Compare-And-Swap, [它是一条CPU并发原语](https://github.com/unofficial-openjdk/openjdk/blob/jdk8u/jdk8u/hotspot/src/share/vm/prims/unsafe.cpp#L1233)
     * Atomic::cmpxchg(x, addr, e) x:即将更新的值,e:原内存的值
 * CAS缺点
+    * 循环时间长cpu开销大
+    * 只能保证一个共享变量的原子操作
+    * ABA问题
+        * 中间过程的值被修改了却感知不到,有猫腻 demo code: com.lcc.juc.cas.CASAtomicReferenceDemo
+        * 解决: 每一次变动增加一个版本号,(expectedReference:期望值,newReference:新值,expectedStamp:期望版本号,newStamp:新版本号) demo code: com.lcc.juc.cas.CASAtomicStampedReferenceDemo
+        
+        
