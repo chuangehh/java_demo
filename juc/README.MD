@@ -1,6 +1,5 @@
 # JUC (java concurrent util) Java 并发包
 
-
 #### 请你谈谈你对volatile关键字的认识?
 * volatile是Java虚拟机提供的轻量级同步机制
     * 保证可见性
@@ -23,6 +22,7 @@
 * 你在那些地方用到过volatile? 
     * 单例模式
     
+
 #### CAS你知道吗?
 * 比较并交换
     * demo code: com.lcc.juc.cas.CASDemo 
@@ -33,7 +33,15 @@
     * 循环时间长cpu开销大
     * 只能保证一个共享变量的原子操作
     * ABA问题
-        * 中间过程的值被修改了却感知不到,有猫腻 demo code: com.lcc.juc.cas.CASAtomicReferenceDemo
-        * 解决: 每一次变动增加一个版本号,(expectedReference:期望值,newReference:新值,expectedStamp:期望版本号,newStamp:新版本号) demo code: com.lcc.juc.cas.CASAtomicStampedReferenceDemo
+        
+
+#### AtomicInteger的ABA问题谈谈? 原子更新引用知道吗?
+* 原子引用 demo code: com.lcc.juc.cas.CASAtomicReferenceDemo
+* 解决: 每一次变动增加一个版本号,(expectedReference:期望值,newReference:新值,expectedStamp:期望版本号,newStamp:新版本号) demo code: com.lcc.juc.cas.CASAtomicStampedReferenceDemo
+
+
+#### 我们知道ArrayList是线程不安全,请编码一个不安全的案例并给出解决方案
+* demo code: com.lcc.juc.collections.CollectionsConCurrentModificationException
+* ArrayList默认数组长度=10,扩容机制1.5倍oldCapacity + (oldCapacity >> 1) @see java.util.ArrayList#grow
         
         
