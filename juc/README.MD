@@ -45,3 +45,22 @@
 * ArrayList默认数组长度=10,扩容机制1.5倍oldCapacity + (oldCapacity >> 1) @see java.util.ArrayList#grow
         
         
+#### 公平锁/非公平锁/可重入锁/递归锁/自旋锁谈谈你的理解?请手写一个自旋锁
+* 公平锁: 线程排队使用资源
+* 非公平锁: 开始就试图抢占资源,如果失败了会像公平锁一样进入队列
+    * 优点: 吞吐量较高,能充分利用cpu
+    * 缺点: 容易造成线程饥饿
+    * synchronized 与 ReentrantLock 就是典型的非公平锁
+* 可重入锁与递归锁是一个概念
+    * 线程可以自动进入拥有该锁的代码块
+* 自旋锁
+    * demo code: com.lcc.juc.lock.SpinLockDemo
+    * 本质上是CAS,不断的进行比较并交换,直到成功为止
+    * 优点是减少了线程的上下文切换
+    * 缺点是如果一直失败对cpu损耗较大
+* 独占锁(写锁)/共享锁(读锁)/互斥锁
+    * 独占锁: 该锁只能被一个线程持有,比如 synchronized,ReentrantLock都是独占锁
+    * 共享锁: 该锁可以被多个线程持有,能保证并发读是非常高效的。读写,写读,写写过程是互斥的
+        * demo code: com.lcc.juc.lock.ReentrantReadWriteLockDemo
+  
+ 
