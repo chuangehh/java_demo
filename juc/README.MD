@@ -64,3 +64,22 @@
         * demo code: com.lcc.juc.lock.ReentrantReadWriteLockDemo
   
  
+#### CountDownLatch/CyclicBarrier/Semaphore使用过吗?
+* com.lcc.juc.util.CountDownLatchDemo
+* com.lcc.juc.util.CyclicBarrierDemo
+* com.lcc.juc.util.SemaphoreDemo
+
+
+#### 阻塞队列知道吗?
+
+
+#### 线程池用过吗? ThreadPoolExecutor谈谈你的理解?
+
+
+#### 线程池用过吗? 生产上你如何设置合理参数
+
+
+#### 死锁编码及定位分析
+
+
+
