@@ -65,12 +65,29 @@
   
  
 #### CountDownLatch/CyclicBarrier/Semaphore使用过吗?
-* com.lcc.juc.util.CountDownLatchDemo
-* com.lcc.juc.util.CyclicBarrierDemo
-* com.lcc.juc.util.SemaphoreDemo
+* demo code: com.lcc.juc.util.CountDownLatchDemo
+* demo code: com.lcc.juc.util.CyclicBarrierDemo
+* demo code: com.lcc.juc.util.SemaphoreDemo
 
 
 #### 阻塞队列知道吗?
+* 队列+阻塞队列
+    * 队列: 先进先出,可以用数组,也可以用链表实现
+    * 阻塞队列
+        * ArrayBlockingQueue 一个基于数组实现有界阻塞队列
+        * LinkedBlockingQueue 一个基于链表实现的无界阻塞队列,吞吐量要大于ArrayBlockingQueue,最大值是Integer.MAX_VALUE
+        * SynchronousQueue 一个基于不实际存储元素的阻塞队列,只存放一个元素的阻塞队列
+        * PriorityBlockingQueue, 一个基于数组实现的支持优先级排序的无界阻塞队列
+        * DelayQueue, 一个基于数组使用优先级队列实现的无界阻塞队列
+        * LinkedBlockingDeque, 一个基于链表实现的双向阻塞队列
+        * LinkedTransferQueue, 一个基于链表实现的无界阻塞队列
+* 为什么要用,有没有好的一面?
+    * 阻塞队列有没有好的一面? 餐厅吃饭排队,一个个来,抢占式还不疯了
+    * 不得不阻塞,该怎么管理? 使用阻塞队列
+* BlockingQueue 的核心方法
+    * demo code: com.lcc.juc.blockingqueue.BlockingQueueDemo
+
+
 
 
 #### 线程池用过吗? ThreadPoolExecutor谈谈你的理解?
