@@ -9,7 +9,7 @@
 
     <parent>
         <groupId>com.lcc</groupId>
-        <artifactId>java_scala_demo</artifactId>
+        <artifactId>java_demo</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 

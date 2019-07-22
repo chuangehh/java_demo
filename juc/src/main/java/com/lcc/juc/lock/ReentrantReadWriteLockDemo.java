@@ -162,7 +162,7 @@ public class ReentrantReadWriteLockDemo {
         // 原始版
         // Cache myCache = new MyCache_v1();
         // ReentrantLock 版
-        // Cache myCache = new MyCache_v2();
+//         Cache myCache = new MyCache_v2();
         // ReentrantReadWriteLock 版
         Cache myCache = new MyCache_v3();
 
