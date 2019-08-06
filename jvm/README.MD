@@ -104,16 +104,16 @@
         * 两个金典参数-Xms和-Xmx
             * -Xms: 等价于-XX:InitialHeapSize
             * -Xmx: 等价于-XX:MaxHeapSize
-* TODO: 盘点家底查看JVM默认值
+* 盘点家底查看JVM默认值
    * -XX:PrintFlagsInitial
         * 查看初始默认值
-        * java -XX:+PrintFlagsInitial
+        * java -XX:+PrintFlagsInitials > jvm.init
    * -XX:PrintFlagsFinal
         * 查看修改更新
-        * java -XX:+PrintFlagsFinal
+        * java -XX:+PrintFlagsFinal -version > jvm.final
         * := 代表修改后的值
-   * PrintFlagsFinal举例,运行java命令的同时打印出参数
-   * -XX:+PrintCommandLineFlags            
+   * PrintFlagsFinal举例,运行java命令的同时打印出参数: demo code: com.lcc.jvm.HelloGC
+   * -XX:+PrintCommandLineFlags: 查看命令行参数,主要用来查看jvm垃圾回收器            
    
 #### 你平时工作用过的JVM常用基本配置参数有那些?
 
