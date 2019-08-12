@@ -15,7 +15,7 @@
     * jdk7 -> jdk8 JVM 
         * http://openjdk.java.net/jeps/122
         * 永久代 -> 元空间
-    * ![avatar](https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=47cc45529b2bd40756cadbaf1ae0f534/bf096b63f6246b6042db690ee7f81a4c500fa2f7.jpg)
+    * ![avatar](./src/main/resources/img/jvm.jpg)
 
 #### GC的作用域
 * 方法区
@@ -116,6 +116,18 @@
    * -XX:+PrintCommandLineFlags: 查看命令行参数,主要用来查看jvm垃圾回收器            
    
 #### 你平时工作用过的JVM常用基本配置参数有那些?
+* JDK 1.8基础知识
+    * JDK 1.8后将永久代取消了，由元空间取代
+      ![avatar](src/main/resources/img/java7-gc.png)
+      
+      ![avatar](src/main/resources/img/java8-gc-metaspace.png)
+    * 永久代与元空间本质区别
+        * 永久代使用的是jvm堆内存
+        * 元空间使用的是本机物理内存,元空间大小仅受本地内存限制
+            * 类的元数据放入native memory
+            * 字符串和类的静态变量放入java堆中
+            * 加载多少元数据不在受MaxPermSize控制,而是由系统实际可用空间来控制
+            
 
 #### 强引用、软引用、弱引用、虚引用分别是什么?
 
