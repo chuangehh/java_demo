@@ -116,6 +116,9 @@
    * -XX:+PrintCommandLineFlags: 查看命令行参数,主要用来查看jvm垃圾回收器            
    
 #### 你平时工作用过的JVM常用基本配置参数有那些?
+* JDK 文档 
+    * https://docs.oracle.com/en/java/javase/12/
+    * 工具类文档搜索tool
 * JDK 1.8基础知识
     * JDK 1.8后将永久代取消了，由元空间取代
       ![avatar](src/main/resources/img/java7-gc.png)
@@ -127,8 +130,43 @@
             * 类的元数据放入native memory
             * 字符串和类的静态变量放入java堆中
             * 加载多少元数据不在受MaxPermSize控制,而是由系统实际可用空间来控制
-            
-
+* 常用参数
+    * -Xms 
+        * 初始大小内存,默认物理内存1/64
+        * 等价于 -XX:InitialHeapSize
+    * -Xmx
+        * 最大分配内存,默认物理内存1/4
+        * 等价于 -XX:MaxHeapSize
+    * -Xss
+        * 设置单个线程栈的大小,默认512K - 1024K(跟随操作系统)
+        * 等价于 -XX:ThreadStackSize
+        * 如果为0代表使用默认值
+        * ![avatar](src/main/resources/img/jvm-Xss.jpg)
+    * -XX:MetaSpaceSize
+        * 设置元空间大小,元空间不在虚拟机中,而是使用本地内存
+        * -XX:MetaspaceSize=1024m -XX:+PrintCommandLineFlags -XX:+PrintFlagsInitial -XX:+PrintFlagsFinal
+    * 典型案例
+        * -Xms128m -Xmx4096m -Xss1024k -XX:MetaspaceSize=1024m -XX:PrintCommandLineFlags -XX:PrintGCDetails -XX:+UseSerialGC
+    * --XX:PrintGCDetails
+        * GC收集日志信息 demo code: com.lcc.jvm.GCDetailDemo
+        * ![avatar](src/main/resources/img/gc.jpg)
+        * ![avatar](src/main/resources/img/full-gc.jpg)
+    * -XX:SurvivorRatio
+        * 设置新生代 Eden和 S0/S1空间的比例
+        * 默认: -XX:SurvivorRatio=8  Eden:S0:S1 =8:1:1
+        * 假如: -XX:SurvivorRatio=4  Eden:S0:S1 =4:1:1
+        * SurvivorRatio值为多少eden占比多少,SO,S1一样
+        *  -Xms10m -Xmx10m -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:+UseSerialGC
+    * -XX:NewRatio
+        * 配置新生代与老年代堆占比
+        * 默认: -XX:NewRatio=2 新生代1,老年代2 年轻代占1/3
+        * 假如: -XX:NewRatio=5 新生代1,老年代5 年轻代占1/6
+    * -XX:MaxTenuringThreshold
+        * 默认进入老年代年龄 15
+        * 设置为0,年轻代对象不经过Survivor区,直接进入老年代 对于老年代比较多的应用可以提高效率
+        * 设置超过15会报错: must be between 0 and 15
+        
+       
 #### 强引用、软引用、弱引用、虚引用分别是什么?
 
 #### 请谈谈你对OOM的认识
