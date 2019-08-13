@@ -168,6 +168,25 @@
         
        
 #### 强引用、软引用、弱引用、虚引用分别是什么?
+* 整体架构
+    ![avatar](src/main/resources/img/reference.jpg)
+* 强引用(默认)
+    * 当内存不足,JVM开始垃圾回收,对于强引用的对象 OOM也不会对该对象进行回收,死都不收
+    * 强引用是造成Java内存泄露的主要原因之一
+    * demo code: com.lcc.jvm.ref.StrongReferenceDemo
+* 软引用
+    * 当内存充足不回收,内存不足时回收
+    * 需要 java.lang.ref.SoftReference 来实现
+    * demo code: com.lcc.jvm.ref.SoftReferenceDemo
+* 弱引用
+    * 每次GC都会进行回收
+    * 需要 java.lang.ref.WeakReference 来实现
+    * demo code: com.lcc.jvm.ref.WeakReferenceDemo
+    * 使用过WeakHashMap吗? demo code: com.lcc.jvm.ref.WeakHashMapDemo
+* 虚引用
+    * 使用 getReference获取不到引用,需要配合引用队列来使用
+    * demo code: com.lcc.jvm.ref.PhantomReferenceDemo
+
 
 #### 请谈谈你对OOM的认识
 
