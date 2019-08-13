@@ -185,10 +185,47 @@
     * 使用过WeakHashMap吗? demo code: com.lcc.jvm.ref.WeakHashMapDemo
 * 虚引用
     * 使用 getReference获取不到引用,需要配合引用队列来使用
+        * DirectByteBuffer是通过虚引用来实现堆外内存的释放的
     * demo code: com.lcc.jvm.ref.PhantomReferenceDemo
 
 
 #### 请谈谈你对OOM的认识
+* java.lang.StackOverflowError
+    * 栈溢出
+    * demo code: com.lcc.jvm.oom.StackOverflowErrorDemo
+* java.lang.OutOfMemoryError: Java heap space
+    * 堆溢出
+    * demo code: com.lcc.jvm.oom.JavaHeapSpaceDemo
+* java.lang.OutOfMemoryError: GC overhead limit exceeded
+    * jvm 98%的时间做GC, 2%的时间做工作
+    * ![avatar](src/main/resources/img/gc-overhead-limit-exceeded.png)
+    * demo code: com.lcc.jvm.oom.OverheadLimitExceededDemo
+    * -XX:-UseGCOverheadLimit 使用该参数会造成什么后果呢?
+        * GC执行后内存又快速被填满,迫使GC再次执行,形成恶性循环
+        * cpu持续100% 却没有任何效果
+* java.lang.OutOfMemoryError: Direct buffer memory
+    * 写NIO 程序经常使用ByteBuffer来读取或者写入数据,这是一种基于通道(Channel)与缓冲区(Buffer)的I/O方式
+    * 使用native 函数库分配堆外内存,通过java堆中DirectByteBuffer操作这块内存,这样能显著提升性能,避免了Java堆和native堆中来回复制
+    * 如果不断分配本地内存,本地内存快满了,Java堆内存使用很少,就不会回收DirectByteBuffer对象,GC以及重试回收堆外内存9次还是不行报错误
+    * com.lcc.jvm.oom.DirectBufferMemoryDemo
+      ```java
+      class Demo{
+          public static void main(String[] args){
+              // 分配Java对内存,GC管辖,需要拷贝速度慢
+              ByteBuffer.allocate(capacity);
+              // 分配OS本地内存,非GC管辖,不需要拷贝速度快
+              ByteBuffer.allocateDirect(capacity);
+          }
+      }  
+      ```
+* java.lang.OutOfMemoryError: unable to create new native thread
+    * 不能创建更多本地线程
+    * demo code: com.lcc.jvm.oom.UnableToCreateNewNativeThreadDemo
+* java.lang.OutOfMemoryError: Metaspace
+    * 在Java8中,将之前 PermGen 中的所有内容, 都移到了 Metaspace 空间。例如: class 名称, 字段, 方法, 字节码, 常量池, JIT优化代码, 等等。
+    * 错误的主要原因, 是加载到内存中的 class 数量太多或者体积太大。
+    * demo code: com.lcc.jvm.oom.MetaspaceDemo
+
 
 #### GC垃圾回收算法和垃圾收集器的关系? 分别是什么请你谈谈
 
