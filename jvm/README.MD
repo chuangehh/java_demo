@@ -249,7 +249,44 @@
     * G1垃圾收集器
         * 将堆内存分割成不同区域,然后并发进行垃圾回收
 
-#### 怎么查看服务器默认的垃圾收集器是那个? 生产上如何配置垃圾收集器的? 谈谈你对垃圾好机器的理解?
+#### 怎么查看服务器默认的垃圾收集器是那个? 生产上如何配置垃圾收集器的? 谈谈你对垃圾收集器的理解?
+* 查看默认垃圾收集器: java -XX:+PrintCommandLineFlags -version
+* 默认垃圾收集
+    * 新生代
+        * UseSerialGC
+        * UseParNewGC
+        * UseParallelGC
+    * 老年代
+        * UseSerialOldGC
+        * UseParallelOldGC
+        * UseConcMarkSweepGC
+    * UseG1GC
+    * ![avatar](src/main/resources/img/jvm-gctype.png)
+* 垃圾收集器
+    * 参数说明
+        * DefNew: Default New Generation
+        * Tenured: Old
+        * ParNew: Parallel New Generation
+        * PSYoungGen: Parallel Scavenge
+        * ParOldGen: Parallel Old Generation
+    * Server/Client 什么意思?
+        * 32位Window 操作系统,不论硬件如何JVM都是Client模式
+        * 32位其他 操作系统,2G内存同时2个cpu以上用Server模式,低于该配置用Client模式
+        * 64位 only server模式
+    * 新生代
+        * 串行GC(Serial)/(Serial Copying)
+        * 并行GC(ParNew)
+        * 并行回收GC(Parallel)/(Parallel Scavenge)
+    * 老年代
+        * 串行GC(Serial Old)/(Serial MSC)
+        * 并行GC(Parallel Old)/(Parallel MSC)
+        * 并发标记清除GC(CMS)
+* 如何选择垃圾收集器
+    * 单CPU或小内存,单机程序: -XX:+UseSerialGC
+    * 多CPU,需要大量吞吐,如大数据: -XX:+UseParallelGC / -XX:+UseParallelOldGC
+    * 多CPU,追求停顿时间短,快速响应的互联网应用: -XX:+UseConcMarkSweepGC
+    * ![avatar](src/main/resources/img/jvm-gctype-chooes.png)
+        
 
 #### G1垃圾收集器
 
@@ -258,4 +295,3 @@
 #### 假如生成环境出现CPU占用过高,请谈谈你的分析思路和定位
 
  
-
