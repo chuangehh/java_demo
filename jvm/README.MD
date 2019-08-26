@@ -286,9 +286,41 @@
     * 多CPU,需要大量吞吐,如大数据: -XX:+UseParallelGC / -XX:+UseParallelOldGC
     * 多CPU,追求停顿时间短,快速响应的互联网应用: -XX:+UseConcMarkSweepGC
     * ![avatar](src/main/resources/img/jvm-gctype-chooes.png)
+    * demo code: com.lcc.jvm.GCDemo
         
 
 #### G1垃圾收集器
+* 以前收集器的特点
+    * 年轻代和老年代是各自独立的连续内存块
+    * 年轻代使用eden+S0+S1 复制算法进行垃圾回收
+    * 老年代的垃圾收集必须遍历整个内存区域
+    * 设计原则: 尽可能少且快的进行垃圾回收
+* G1是什么
+    * 是什么
+        * G1 Garbage-First收集器,是一款面向服务端的收集器
+        * 应用在多处理器和大容量内存环境中,在实现高吞吐量同时，尽可能满足垃圾收集暂停时间短的要求
+        * 像CMS一样,GC回收与用户线程并行,设计目标: 取代CMS垃圾收集器(JDK9默认垃圾收集器已经是G1)
+        * G1停顿时间添加了预测机制,用户可以指定期望停顿时间
+    * 特点
+        * 充分利用多CPU，多核环境硬件优势,尽量缩短STW时间
+        * 整体采用标记-整理算法,局部使用复制算法,不产生内存碎片
+        * 宏观上G1不在区分新生代和老年代,把内存划分成多个独立的区域
+        * 依然在小范围进行年轻代和老年代区分
+        * 不存在物理上的年轻代和老年代,只有逻辑上的分代概念,每个区域随着G1运行在不同代进行切换
+* 底层原理
+    * Region区域化垃圾收集器
+        * 化整为零,避免全内存扫描,只需要按区域来扫描即可
+        * 最大32MB * 2048 = 64G 
+    * 回收步骤 ![avatar](src/main/resources/img/g1-gc.png)
+    * 4步过程 ![avatar](src/main/resources/img/g1-step.png)
+* 常用配置参数
+    * -XX:+UseG1GC
+    * -XX:G1HeapRegionSize=n  设置G1区域大小,范围是1MB~32MB    
+    * -XX:MaxGCPauseMillis=n  设置期望停顿时间
+* 和CMS相比优势
+    * G1没有内存碎片
+    * G1可以设置期望停顿时间
+        
 
 #### 生成环境服务器变慢,诊断思路和性能评估谈谈?
 
