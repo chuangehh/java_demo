@@ -19,6 +19,7 @@
         <module>jvm</module>
         <module>nio</module>
         <module>structures</module>
+        <module>javase</module>
     </modules>
 
 </project>
