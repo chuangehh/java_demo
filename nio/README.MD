@@ -43,3 +43,15 @@
     * Selector会根据不同Event(事件)在各个Channel上切换
     * Channel对应一个Buffer,Channel是双向的,可以返回操作系统情况,比如Linux的通道就是双向的
     * Buffer是一个内存块,底层是一个数组.Buffer是双向的(可以通过flip方法切换读写),BIO要么是输入流要么是输出流,不能双向
+* Buffer 缓冲区
+    * 是一个可以读写的内存块,容器对象(数组)
+    * Buffer类及其子类(抽象类)
+       * IntBuffer
+       * FloatBuffer
+       * CharBuffer
+       * DoubleBuffer
+       * ShortBuffer
+       * LongBuffer
+       * ByteBuffer 最常用
+    * Buffer四个属性debug走一圈 com.lcc.nio.TestBuffer mark <= position <= limit <= capacity
+* Channel 通道

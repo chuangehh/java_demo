@@ -3,25 +3,15 @@ package com.lcc.nio;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 /**
  * 测试Buffer
- * 0 <= mark <=position <= limit <= capacity
+ * 0 <= mark <= position <= limit <= capacity
+ *
+ * @author liangchuanchuan
  */
 public class TestBuffer {
-
-
-    /**
-     * 直接缓冲区,建立在操作系统内存中
-     */
-    @Test
-    public void direct() {
-        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(1024);
-        System.out.println(byteBuffer.isDirect());
-
-        byteBuffer = ByteBuffer.allocate(1024);
-        System.out.println(byteBuffer.isDirect());
-    }
 
     /**
      * 测试api
@@ -32,6 +22,7 @@ public class TestBuffer {
 
         // 0.获取Buffer
         ByteBuffer buf = ByteBuffer.allocate(1024);
+        // ByteBuffer buf = ByteBuffer.allocateDirect(1024);
         System.out.println("===================allocate()===================");
         System.out.println("buf.position(): " + buf.position());
         System.out.println("buf.limit(): " + buf.limit());
@@ -97,6 +88,11 @@ public class TestBuffer {
         System.out.println("buf.limit(): " + buf.limit());
         System.out.println("buf.capacity(): " + buf.capacity());
 
+
+        // 7.hasArray
+        System.out.println(buf.hasArray());
+        // 8.array
+        System.out.println("array: "+ new String(buf.array()));
     }
 
 }
