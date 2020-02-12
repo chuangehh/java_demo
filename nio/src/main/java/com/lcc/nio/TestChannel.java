@@ -87,17 +87,21 @@ public class TestChannel {
 
         FileChannel inputChannel = inputStream.getChannel();
         FileChannel outputChannel = outputStream.getChannel();
-        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(3 * 10);
 
-        while (true) {
-            int read = inputChannel.read(byteBuffer);
-            if (read == -1) {
-                break;
-            }
-            byteBuffer.flip();
-            outputChannel.write(byteBuffer);
-            byteBuffer.clear();
-        }
+        // 1.原始实现
+//        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(3 * 10);
+//        while (true) {
+//            int read = inputChannel.read(byteBuffer);
+//            if (read == -1) {
+//                break;
+//            }
+//            byteBuffer.flip();
+//            outputChannel.write(byteBuffer);
+//            byteBuffer.clear();
+//        }
+
+        // 2.使用api
+        outputChannel.transferFrom(inputChannel,0,inputChannel.size());
 
         inputStream.close();
         outputStream.close();
