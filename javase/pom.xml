@@ -12,7 +12,7 @@
     <artifactId>javase</artifactId>
 
     <properties>
-        <zookeeper.version>3.4.10</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
     </properties>
 
     <dependencies>
