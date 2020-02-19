@@ -75,4 +75,26 @@
         * 可以把一个普通Buffer 转成只读Buffer com.lcc.nio.TestBuffer#bufferReadOnly
         * 提供了MappedByteBuffer,可以让文件直接在堆外内存进行修改,而如何同步由NIO来完成 com.lcc.nio.TestBuffer#mappedByteBuffer
         * 可以支持 多个Buffer的操作,分散(Scattering)/聚合(Gathering) com.lcc.nio.TestBuffer#scatteringAndGathering
-        
+* Selector 选择器
+    * 基本介绍
+        * 用一个线程处理多个客户端链接,就会使用到Selector选择器 
+        * Selector能检测多个注册的通道是否发生事件,然后获取事件进行相应处理
+        * 只有在 链接/通道 真正读写事件发生时,才会进行处理,大大减少了系统开销,不必为每个链接维护一个线程
+        * 避免了多线程上下文切换导致的开销
+    * 特点
+        * Netty的IO线程NioEventLoop聚合了Selector,可以同事并发处理成百上千的客户端链接
+        * 线程通常将空闲时间用于其他通道上执行IO操作,所以可以管理多个输入输出Channel
+        * 由于读写都是非阻塞的,避免由于频繁IO阻塞导致线程挂起
+        * 一个IO线程可以并发处理多个客户端链接和读写操作 根本解决了传统BIO 1对1模型，性能得到极大提升
+    * NIO非阻塞 网络编程原理分析图
+        * ![avatar](./src/main/resources/img/selector_socket.png)
+        * 上图说明
+        ```text 
+        1.服务端ServerSocketChannel注册到Selector, 此处对应链接事件 java.nio.channels.SelectionKey.OP_ACCEPT
+        2.客户端创建SocketChannel链接服务器
+        3.服务端通过Selector获取SelectionKey,通过ServerSocketChannel得到SocketChannel并注册到Selector上
+        4.客户端发送数据
+        5.服务端根据Selector 的SelectionKey获取SocketChannel
+        6.通过Channel完成业务代码
+        ```
+        * com.lcc.nio.TestSelector
