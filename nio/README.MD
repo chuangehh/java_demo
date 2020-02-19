@@ -23,7 +23,7 @@
       特点是先由操作系统完成后才通知服务端程序进行处理,一般适合连接数较多且连接时间较长的应用
     * 场景: 连接数较多、连接时间比较长,编程比较复杂,JDK7开始支持,如相册服务器
 
-## Java NIO编程
+## 第三章: Java NIO编程
 * Java Nio基本介绍
     * 全称java non-blocking IO,从JDK1.4开始提供一系列改进输入/输出的新特性,被称为NIO(New IO),是同步非阻塞的
     * NIO相关类都放在 java.nio包下,并且对原java.io 包中很多类进行改写
@@ -53,5 +53,26 @@
        * ShortBuffer
        * LongBuffer
        * ByteBuffer 最常用
-    * Buffer四个属性debug走一圈 com.lcc.nio.TestBuffer mark <= position <= limit <= capacity
+    * Bufferbai四个属性debug走一圈 com.lcc.nio.TestBuffer mark <= position <= limit <= capacity
 * Channel 通道
+    * 基本介绍
+        * 类似于流,但有如下区别
+            ```text
+                可以同时进行读写,而流只能读或者只能写
+                可以实现异步读写数据
+                可以从缓冲读数据,也可以写数据到缓冲
+            ```
+        * 双向读写
+        * Channel是一个接口 
+        * 常用Channel: FileChannel、DatagramChannel、ServerSocketChannel(类似ServerSocket) & SocketChannel(类似Socket)
+    * 案例
+        * 通过FileChannel写入数据 com.lcc.nio.TestChannel#fileChannelWrite
+        * 通过FileChannel读入数据 com.lcc.nio.TestChannel#fileChannelRead
+        * 通过Channel读取数据到Buffer中,在把这个Buffer数据写道另外一个文件 com.lcc.nio.TestChannel#fileChannelReadAndWriteUseSameBuffer
+        * 使用trasferFrom 完成文件拷贝 com.lcc.nio.TestChannel#fileChannelReadAndWriteUseSameBuffer
+    * Buffer和Channel注意细节
+        * Byte支持类型化的put,get 需要按顺序放跟读取 com.lcc.nio.TestBuffer#bufferPutGetType
+        * 可以把一个普通Buffer 转成只读Buffer com.lcc.nio.TestBuffer#bufferReadOnly
+        * 提供了MappedByteBuffer,可以让文件直接在堆外内存进行修改,而如何同步由NIO来完成 com.lcc.nio.TestBuffer#mappedByteBuffer
+        * 可以支持 多个Buffer的操作,分散(Scattering)/聚合(Gathering) com.lcc.nio.TestBuffer#scatteringAndGathering
+        
