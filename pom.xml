@@ -20,6 +20,7 @@
         <module>nio</module>
         <module>structures</module>
         <module>javase</module>
+        <module>mq</module>
     </modules>
 
 </project>
