@@ -1,29 +1,32 @@
 package com.lcc.algorithm.sort;
 
-import java.util.Arrays;
-
 /**
  * 冒泡排序
+ *
+ * @author liangchuanchuan
  */
-public class BubbleSort {
+public class BubbleSort extends AbstractSort {
 
+	static int bound = 10 * 10000;
 
-	public static void main(String[] args) {
-		int[] num = new int[]{20, 5, 7, 88, 66, 55};
-
+	@Override
+	void sort(int[] randomNumList) {
 		// 1.轮数
-		for (int i = 0; i < num.length - 1; i++) {
+		for (int i = 0; i < randomNumList.length - 1; i++) {
 			// 2.交换
-			for (int j = i; j < num.length - 1; j++) {
-				if (num[j] > num[j + 1]) {
-					int current = num[j];
-					num[j] = num[j + 1];
-					num[j + 1] = current;
+			for (int j = 0; j < randomNumList.length - 1 - i; j++) {
+				if (randomNumList[j] > randomNumList[j + 1]) {
+					int current = randomNumList[j];
+					randomNumList[j] = randomNumList[j + 1];
+					randomNumList[j + 1] = current;
 				}
 			}
 		}
+	}
 
-		System.out.println(Arrays.toString(num));
+	public static void main(String[] args) {
+		BubbleSort bubbleSort = new BubbleSort();
+		bubbleSort.sortAndPrintTime(bound);
 	}
 
 }
