@@ -21,6 +21,8 @@
         <module>structures</module>
         <module>javase</module>
         <module>mq</module>
+        <module>design-patterns</module>
+        <module>architecture</module>
     </modules>
 
 </project>
