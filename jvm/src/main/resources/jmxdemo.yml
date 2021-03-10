@@ -1,0 +1,10 @@
+---
+hostPort: 127.0.0.1:16013
+ssl: false
+username:
+password:
+
+lowercaseOutputLabelNames: true
+lowercaseOutputName: true
+rules:
+  - pattern: ".*"
