@@ -98,3 +98,12 @@
         6.通过Channel完成业务代码
         ```
         * com.lcc.nio.TestSelector
+ * SelectionKey
+    * Selector和网络通道注册关系
+    * 常用方法
+    * ![avatar](./src/main/resources/img/SelectionKey_method.jpg)
+ * ServerSocketChannel
+    * 服务端监听客户端Socket链接
+    * 常用方法
+    * ![avatar](./src/main/resources/img/ServerSocketChannel_method.png)
+* SocketChannel
