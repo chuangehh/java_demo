@@ -13,7 +13,7 @@ import java.io.IOException;
  * 1.同步阻塞方法 receive()
  * 2.异步非阻塞方式(注册监听器,onMessage()), 监听器调用另一个线程处理
  */
-public class JmsConsumer {
+public class JmsQueueConsumer {
 	public static final String DEFAULT_BROKER_URL = "tcp://hadoop100:61616";
 	public static final String QUEUE_NAME = "lcc_queue";
 

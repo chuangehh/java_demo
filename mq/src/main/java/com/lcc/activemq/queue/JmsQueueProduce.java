@@ -22,7 +22,7 @@ import javax.jms.*;
  * 7.发送消息/消费消息
  * 8.关闭相关资源
  */
-public class JmsProduce {
+public class JmsQueueProduce {
 	public static final String DEFAULT_BROKER_URL = "tcp://hadoop100:61616";
 	public static final String QUEUE_NAME = "lcc_queue";
 
