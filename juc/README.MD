@@ -53,6 +53,8 @@
     * synchronized 与 ReentrantLock 就是典型的非公平锁
 * 可重入锁与递归锁是一个概念
     * 线程可以自动进入拥有该锁的代码块
+    * Java的synchronized与ReentrantLock 都是可重入锁，可以避免一定程度的死锁
+    * demo code: com.lcc.juc.lock.ReentrantLockDemo
 * 自旋锁
     * demo code: com.lcc.juc.lock.SpinLockDemo
     * 本质上是CAS,不断的进行比较并交换,直到成功为止
@@ -99,4 +101,5 @@
 #### 死锁编码及定位分析
 
 
+#### LockSupport
 
