@@ -23,6 +23,7 @@
         <module>mq</module>
         <module>design-patterns</module>
         <module>architecture</module>
+        <module>netty</module>
     </modules>
 
 </project>
