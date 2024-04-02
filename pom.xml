@@ -24,6 +24,7 @@
         <module>design-patterns</module>
         <module>architecture</module>
         <module>netty</module>
+        <module>juc2024</module>
     </modules>
 
 </project>
