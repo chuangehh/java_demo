@@ -13,6 +13,10 @@
 交个朋友，我的微信 chuanchuan768
 ```
 
+## 分布式事务
+* 可靠消息最终一致性MQ
+
+
 ## JUC 2024
 * CompletableFuture
     * 跨境平台产品比价, 怎么由多个平台穿心执行3秒 优化到1秒？ 见代码 ComletableFutureMallDemo
