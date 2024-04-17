@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * MQ消费监听者
  */
 @Component
-@RocketMQTransactionListener(txProducerGroup = "dtx_bank1")
+@RocketMQTransactionListener(txProducerGroup = "producer_dtx_bank1")
 public class ProducerTxmsgListener implements RocketMQLocalTransactionListener {
 
     @Autowired
@@ -43,7 +43,8 @@ public class ProducerTxmsgListener implements RocketMQLocalTransactionListener {
         if (countNum >= 1) {
             return RocketMQLocalTransactionState.COMMIT;
         } else {
-            return RocketMQLocalTransactionState.ROLLBACK;
+            // 为什么不返回ROLLBACK？ 有可能数据库死锁了，人工介入就修复好了，先UNKNOW等待下次继续调用
+            return RocketMQLocalTransactionState.UNKNOWN;
         }
     }
 }

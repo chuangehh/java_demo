@@ -21,7 +21,7 @@ public class AccountInfoServiceImpl implements AccountInfoService {
     @Override
     public void transferMQ(AccountChangeEvent accountChangeEvent) {
         MessageBuilder<String> messageBuilder = MessageBuilder.withPayload(JSONObject.toJSONString(accountChangeEvent));
-        rocketMqTemplate.sendMessageInTransaction("dtx_bank1", "dtx", messageBuilder.build(), null);
+        rocketMqTemplate.sendMessageInTransaction("producer_dtx_bank1", "dtx_bank_topic", messageBuilder.build(), null);
     }
 
     @Transactional
