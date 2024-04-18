@@ -46,8 +46,8 @@ start "RocketMQ Broker" "%ROCKETMQ_HOME%\bin\mqbroker.cmd" -n 127.0.0.1:9876 aut
 * bank2 ComsumerMsgListener.onMessage 会被RocketMQ多次调用，通过这样消费端保障最终一致，如果还有异常，人工介入
 
 ### 问题总结
-* 1、消息重复消费问题，生成全局事务id存储数据库或redis判重解决（幂等解决）
-* 2、本地事务与MQ发送的原子问题，通过MQ消息带一个状态信息解决比如0是未提交，1是已提交；或者使用RocketMQ的半消息机制解决
-* 3、事务参与方收消息的可靠性问题，如生产者、消费者执行一半挂掉问题
+* 1、本地事务与MQ发送原子问题，使用RocketMQ的半消息机制解决或 MQ消息带一个状态信息解决比如0是未提交，1是已提交
+* 2、事务参与方收消息的可靠性问题，如生产者、消费者执行一半挂掉问题
     * 生产者通过 状态检查机制解决，如RocketMQLocalTransactionListener.checkLocalTransaction方法解决
     * 消费者通过 重复消费解决，如果该消息没有被消费成功重复推送该消息
+* 3、消息重复消费问题，生成全局事务id存储数据库或redis判重解决（幂等解决）

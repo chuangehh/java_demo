@@ -23,6 +23,7 @@ public class ComsumerMsgListener implements RocketMQListener<String> {
     @Override
     public void onMessage(String message) {
         AccountChangeEvent event = JSONObject.parseObject(message, AccountChangeEvent.class);
+        // int i = 10 / 0;
         accountInfoService.doTransfer(event);
     }
 
