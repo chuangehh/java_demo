@@ -1,0 +1,32 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: seataStorageService
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+          
+seata:
+  enabled: true
+  application-id: seataStorageService
+  tx-service-group: my_test_tx_group
+  config:
+    type: nacos
+    nacos:
+      #namespace: seata
+      serverAddr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      username: "nacos"
+      password: "nacos"
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      #namespace: dev
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      username: "nacos"
+      password: "nacos"
